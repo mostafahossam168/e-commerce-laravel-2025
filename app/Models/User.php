@@ -6,22 +6,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,6 +34,35 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorites')->withPivot('session_id', 'ip')->withTimestamps();
+    }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Product::class, 'carts')->withPivot('price', 'qty', 'session_id', 'ip')->withTimestamps();
+    }
+
+
+    public function rates()
+    {
+        return $this->belongsToMany(Product::class, 'rates')->withPivot('notes', 'rate')->withTimestamps();
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function fcm_token()
+    {
+        return $this->hasOne(FcmToken::class);
+    }
 
     /**
      * Get the attributes that should be cast.
