@@ -8,12 +8,14 @@ use App\Interfaces\ContactUsInterface;
 use App\Interfaces\FavoriteInterface;
 use App\Interfaces\ProductInterface;
 use App\Interfaces\RateInterface;
+use App\Interfaces\UserInterface;
 use App\Repositories\CartRepository;
 use App\Repositories\CategoryRepository;
-use App\Repositories\contactUsRepository;
+use App\Repositories\ContactUsRepository;
 use App\Repositories\FavoriteRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\RateRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -28,7 +30,8 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(FavoriteInterface::class, FavoriteRepository::class);
         $this->app->bind(CartInterface::class, CartRepository::class);
         $this->app->bind(RateInterface::class, RateRepository::class);
-        $this->app->bind(ContactUsInterface::class, contactUsRepository::class);
+        $this->app->bind(ContactUsInterface::class, ContactUsRepository::class);
+        $this->app->bind(UserInterface::class, UserRepository::class);
     }
 
     /**

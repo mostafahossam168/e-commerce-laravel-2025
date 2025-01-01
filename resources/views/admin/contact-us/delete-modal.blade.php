@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">حذف رسالة</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('admin.contact-us.destroy',$item->id) }}" method="POST">
+            <form action="{{ route('admin.contacts.destroy', $item->id) }}" method="POST">
                 <div class="modal-body">
                     @csrf
                     @method('DELETE')

@@ -17,7 +17,7 @@
                         <h6 class="name">العملاء</h6>
                         <h3 class="amount"><span class="num-stat"
                                 data-goal="{{ \App\Models\User::where('type', 'client')->count() }}">0</span></h3>
-                        <a href="" class="link-view">@lang('admin.View all clients')</a>
+                        <a href="" class="link-view">عرض جميع العملاء</a>
                     </div>
                     <div class="left-side">
                         <p class="status-number up"> </i></p>
@@ -30,10 +30,10 @@
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div class="box-statistic blue">
                     <div class="right-side">
-                        <h6 class="name">@lang('admin.Vendors')</h6>
+                        <h6 class="name">المشرفين</h6>
                         <h3 class="amount"><span class="num-stat"
-                                data-goal="{{ \App\Models\User::where('type', 'vendor')->count() }}">0</span></h3>
-                        <a href="" class="link-view">@lang('admin.View all Vendors')</a>
+                                data-goal="{{ \App\Models\User::where('type', 'admin')->count() }}">0</span></h3>
+                        <a href="" class="link-view">عرض جميع المشرفين</a>
                     </div>
                     <div class="left-side">
                         <p class="status-number down"></i></p>
@@ -46,9 +46,9 @@
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div class="box-statistic purple">
                     <div class="right-side">
-                        <h6 class="name">@lang('admin.Sections')</h6>
+                        <h6 class="name">الاقسام</h6>
                         <h3 class="amount num-stat" data-goal="{{ \App\Models\Category::count() }}">0</h3>
-                        <a href="" class="link-view">@lang('admin.Show all sections')</a>
+                        <a href="{{ route('admin.categories.index') }}" class="link-view">عرض جميع الاقسام</a>
                     </div>
                     <div class="left-side">
                         <p class="status-number up"> </i></p>
@@ -61,10 +61,10 @@
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div class="box-statistic green">
                     <div class="right-side">
-                        <h6 class="name">@lang('admin.Products')</h6>
+                        <h6 class="name">المنتجات</h6>
                         <h3 class="amount"><span class="num-stat" data-goal="{{ \App\Models\Product::count() }}">0</span>
                         </h3>
-                        <a href="#" class="link-view">@lang('admin.Show all products')</a>
+                        <a href="{{ route('admin.products.index') }}" class="link-view">عرض جميع المنتجات</a>
                     </div>
                     <div class="left-side">
                         <p class="status-number"></p>
@@ -136,10 +136,10 @@
                             <div class="col-12 col-md-6">
                                 <div class="box-statistic purple">
                                     <div class="right-side">
-                                        <h6 class="name">@lang('admin.Contact Us')</h6>
+                                        <h6 class="name"> تواصل معنا</h6>
                                         <h3 class="amount num-stat" data-goal="{{ \App\Models\ContactUs::count() }}">0
                                         </h3>
-                                        <a href="" class="link-view">@lang('admin.View communication messages')</a>
+                                        <a href="" class="link-view">عرض جميع الرسائل </a>
                                     </div>
                                     <div class="left-side">
                                         <p class="status-number up"></p>

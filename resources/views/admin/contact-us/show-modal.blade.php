@@ -8,7 +8,7 @@
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label for="">@lang("Name")</label>
+                    <label for="">@lang('Name')</label>
                     <p>{{ $item->name }}</p>
                 </div>
 

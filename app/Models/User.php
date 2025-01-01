@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,6 +37,25 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+    public function scopeActive($q)
+    {
+        return $q->where('status', 1);
+    }
+    public function scopeInActive($q)
+    {
+        return $q->where('status', 0);
+    }
+
+
+    public function ScopeUsers($q)
+    {
+        return $q->where('type', 'user');
+    }
+    public function ScopeAdmins($q)
+    {
+        return $q->where('type', 'admin');
+    }
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
@@ -72,6 +93,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'status' => Status::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];

@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin')
-@section('title', 'اتصل بنا | وارد')
+@section('title', ' تواصل معنا')
 @section('content')
     <div class="main-side">
         <div class="main-title">
@@ -7,15 +7,25 @@
                 @lang('Home')
             </div>
             <div class="large">
-                اتصل بنا | وارد
+                تواصل معنا
             </div>
         </div>
+        <div class="btn-holder d-flex align-items-center justify-content-start gap-1 mb-2">
+            <div class="box-search">
+                <form action="">
+                    <img src="{{ asset('admin-asset/img/icons/search.png') }}" alt="icon" />
+                    <input type="search" id="" value="{{ request('search') }}" name="search"
+                        placeholder="@lang('Search')" />
+                </form>
+            </div>
+        </div>
+        <x-alert-admin />
         <div class="table-responsive">
             <table class="main-table mb-2">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>@lang('Name')</th>
+                        <th>الاسم</th>
                         <th>الهاتف</th>
                         <th>الايميل</th>
                         <th>الرساله</th>
@@ -24,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($contactuses as $item)
+                    @foreach ($items as $item)
                         <tr>
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
@@ -39,29 +49,20 @@
                                     data-bs-target="#show{{ $item->id }}">
                                     <i class="fa fa-eye"></i>
                                 </a>
-
-
-
-
                                 @include('admin.contact-us.show-modal', ['item' => $item])
-                                {{-- @endcan --}}
-                                {{-- @can('delete_contact') --}}
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $item->id }}">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-
                                 @include('admin.contact-us.delete-modal', [
                                     'item' => $item,
                                 ])
-                                {{-- @endcan --}}
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{ $contactuses->links() }}
+            {{ $items->links() }}
         </div>
     </div>
 @endsection

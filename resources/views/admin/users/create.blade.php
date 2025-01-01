@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin')
-@section('title', 'اضافة منتج')
+@section('title', 'اضافة عميل')
 @section('content')
     <div class="main-side">
         <x-alert-admin />
@@ -10,14 +10,14 @@
                     الرئيسية
                 </div>
                 <div class="large">
-                    اضافة منتج
+                    اضافة عميل
                 </div>
             </div>
-            <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">المنتجات <i
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">العملاء <i
                     class="fas fa-arrow-left-long"></i></a>
         </div>
 
-        <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
             <div class="row g-3">
                 @csrf
                 <div class="col-12 col-md-4 col-lg-3">
@@ -29,21 +29,20 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3">
-                    <label class="special-input">
-                        <span>الصوره الاساسية</span>
-                        <input class="form-control" name="main_image" type="file" accept="image/*">
-                    </label>
+                    <div class="inp-holder">
+                        <label class="special-input">
+                            <span>البريد الالكتروني</span>
+                            <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+                        </label>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <label class="special-input">
-                        <span>القسم</span>
-                        <select class="form-select" name="category_id">
-                            <option>--- اختر ---</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </label>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="inp-holder">
+                        <label class="special-input">
+                            <span>الهاتف</span>
+                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control">
+                        </label>
+                    </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3">
                     <label class="special-input">
@@ -51,55 +50,36 @@
                         <select class="form-select" name="status">
                             <option>--- اختر ---</option>
                             @foreach (collect(\App\enums\Status::cases())->toArray() as $status)
-                                <option value="{{ $status }}"  @selected(old('status') == $status)>
+                                <option value="{{ $status }}" @selected(old('status') == $status)>
                                     {{ $status->name() }}
                                 </option>
                             @endforeach
                         </select>
                     </label>
                 </div>
-
-                <div class="col-12 m-0">
-                    <hr class="m-0 border-0">
-                </div>
-
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="inp-holder">
                         <label class="special-input">
-                            <span>السعر</span>
-                            <input type="number" name="price" value="{{ old('price') }}" class="form-control">
+                            <span>الباسورد</span>
+                            <input type="password" name="password" class="form-control">
                         </label>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="inp-holder">
                         <label class="special-input">
-                            <span>تخفيض</span>
-                            <input type="number" name="price_offer" value="{{ old('price_offer', 0) }}"
-                                class="form-control">
+                            <span>تاكيد الباسورد</span>
+                            <input type="password" name="password_confirmation" class="form-control">
                         </label>
                     </div>
                 </div>
 
                 <div class="col-12 col-md-4 col-lg-3">
                     <label class="special-input">
-                        <span>الصور</span>
-                        <input class="form-control" name="images[]" type="file" multiple accept="image/*">
+                        <span>الصوره </span>
+                        <input class="form-control" name="image" type="file" accept="image/*">
                     </label>
                 </div>
-
-                <div class="col-12 ">
-                    <div class="inp-holder">
-                        <label class="special-label">
-                            الوصف
-                        </label>
-                        <textarea name="description" class="ckeditor form-control" rows="8">{{ old('description') }}</textarea>
-                    </div>
-                </div>
-                <div class="col-12 m-0">
-                    <hr class="m-0 border-0">
-                </div>
-
                 <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="btn-holder mt-2">
                         <button type="submit" class="main-btn">@lang('Save')</button>

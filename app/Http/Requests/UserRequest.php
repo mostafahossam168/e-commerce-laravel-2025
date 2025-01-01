@@ -19,15 +19,6 @@ class UserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    // public function rules(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
-
-
-
     public function rules()
     {
         switch ($this->method()) {
@@ -44,10 +35,10 @@ class UserRequest extends FormRequest
             case 'PATCH': {
                     return [
                         'name' => 'required',
-                        'phone' => 'required|numeric|unique:users,phone',
-                        'email' => 'required|email|unique:users,email',
-                        'image' => 'nullable|mimes:png,jpg'
-                        // 'phone' => 'required|numeric|unique:clients,phone,' . $this->route()->client->id,
+                        'phone' => 'required|numeric|unique:users,phone,' . $this->user,
+                        'email' => 'required|email|unique:users,email,' . $this->user,
+                        'image' => 'nullable|mimes:png,jpg',
+                        'password' => 'required|min:4|confirmed',
                     ];
                 }
             default:

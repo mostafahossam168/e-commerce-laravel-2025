@@ -24,5 +24,9 @@ class AuthAdminController extends Controller
         return back()->with('error', 'نأسف لكن كلمة المرور أو البريد الالكتروني غير صحيح');
     }
 
-    public function logout() {}
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('admin.login');
+    }
 }

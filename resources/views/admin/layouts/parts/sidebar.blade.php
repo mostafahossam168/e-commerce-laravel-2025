@@ -28,6 +28,26 @@
                 </div>
             </a>
         </li>
+        <li class="list-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.users.index') }}" class="">
+                <div>
+                    <i class="fa-solid fa-users"></i>
+                    العملاء
+                </div>
+            </a>
+        </li>
+
+
+        <li class="list-item {{ request()->routeIs('admin.contacts') ? 'active' : '' }}">
+            <a href="{{ route('admin.contacts') }}" class="">
+                <div>
+                    <i class="fa-solid fa-handshake-angle"></i>
+                    تواصل معنا
+                    <div class="main-badge">{{ \App\Models\ContactUs::count() }}</div>
+
+                </div>
+            </a>
+        </li>
     </ul>
     {{-- <ul class="list">
         <li class="list-item {{ request()->routeIs('admin.home') ? 'active' : '' }}">
