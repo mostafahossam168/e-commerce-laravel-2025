@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->decimal('price', 8, 2);
-            $table->decimal('price_offer', 8, 2);
+            $table->decimal('price_offer', 8, 2)->nullable();
             $table->boolean('status')->default(1);
             $table->string('main_image');
             $table->timestamps();

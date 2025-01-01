@@ -11,11 +11,20 @@
                 </div>
             </a>
         </li>
-        <li class="list-item {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+        <li class="list-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
             <a href="{{ route('admin.categories.index') }}" class="">
                 <div>
                     <i class="fa-solid fa-list"></i>
                     الاقسام
+                </div>
+            </a>
+        </li>
+
+        <li class="list-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.products.index') }}" class="">
+                <div>
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    المنتجات
                 </div>
             </a>
         </li>

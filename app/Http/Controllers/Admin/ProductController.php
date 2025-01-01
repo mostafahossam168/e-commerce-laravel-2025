@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Interfaces\ProductInterface;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,25 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = $this->itemRepository->create()['categories'];
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $data = $request->except('images', 'main_image');
+        $data['main_image'] = store_file($request->main_image, 'products');
+        $images = [];
+        if ($request->images) {
+            foreach ($request->images as $image) {
+                $images[] = store_file($image, 'products');
+            }
+        }
+        $this->itemRepository->store(['data' => $data, 'images' => $images]);
+        return redirect()->route('admin.products.index')->with('success', 'تم الحفظ بنجاح');
     }
 
     /**
@@ -43,7 +54,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $item = $this->itemRepository->show($id);
+        return view('admin.products.show', compact('item'));
     }
 
     /**
@@ -51,7 +63,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = $this->itemRepository->edit($id)['item'];
+        $categories = $this->itemRepository->edit($id)['categories'];
+        return view('admin.products.edit', compact('categories', 'item'));
     }
 
     /**
@@ -59,7 +73,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $product = $this->itemRepository->show($id);
+        $data = $request->except('images', 'main_image');
+        if ($request->main_image != null) {
+            delete_file($product->main_image);
+            $data['main_image'] = store_file($request->main_image, 'products');
+        }
+
+        $images = [];
+        if ($request->images) {
+            foreach ($product->images as $image) {
+                delete_file($image->path);
+                $image->delete();
+            }
+            foreach ($request->images as $image) {
+                $images[] = store_file($image, 'products');
+            }
+        }
+        $this->itemRepository->update(['data' => $data, 'images' => $images], $id);
+        return redirect()->route('admin.products.index')->with('success', 'تم تعديل المنتج بنجاح ');
     }
 
     /**
@@ -67,6 +100,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->itemRepository->destroy($id);
+        return back()->with('success', 'تم حذف المنتج بنجاح ');
     }
 }

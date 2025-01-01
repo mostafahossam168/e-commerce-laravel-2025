@@ -11,21 +11,31 @@
                 الاقسام
             </div>
         </div>
-        <div class="btn-holder d-flex align-items-center justify-content-start gap-1 mb-2">
-            <button type="button" class="main-btn" data-bs-toggle="modal" data-bs-target="#create">
-                اضافة
-                <i class="fa-solid fa-plus"></i>
-            </button>
-            @include('admin.categories.create-modal')
-            <a href="{{ route('admin.categories.index') }}" type="button" class="main-btn btn-main-color">الكل:
-                {{ App\Models\Category::count() }}</a>
-            <a href="{{ route('admin.categories.index', ['status' => 'yes']) }}" type="button"
-                class="btn btn-success">مفعل:
-                {{ App\Models\Category::active()->count() }}</a>
-            <a href="{{ route('admin.categories.index', ['status' => 'no']) }}" type="button" class="btn btn-danger">غير
-                مفعل:
-                {{ App\Models\Category::inactive()->count() }}</a>
+        <div class="bar-options d-flex align-items-center justify-content-between flex-wrap gap-1 mb-2">
+            <div class="btn-holder d-flex align-items-center justify-content-start gap-1 mb-2">
+                <button type="button" class="main-btn" data-bs-toggle="modal" data-bs-target="#create">
+                    اضافة
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                @include('admin.categories.create-modal')
+                <a href="{{ route('admin.categories.index') }}" type="button" class="main-btn btn-main-color">الكل:
+                    {{ App\Models\Category::count() }}</a>
+                <a href="{{ route('admin.categories.index', ['status' => 'yes']) }}" type="button"
+                    class="btn btn-success">مفعل:
+                    {{ App\Models\Category::active()->count() }}</a>
+                <a href="{{ route('admin.categories.index', ['status' => 'no']) }}" type="button"
+                    class="btn btn-danger">غير
+                    مفعل:
+                    {{ App\Models\Category::inactive()->count() }}</a>
+            </div>
 
+            <div class="box-search">
+                <form action="">
+                    <img src="{{ asset('admin-asset/img/icons/search.png') }}" alt="icon" />
+                    <input type="search" id="" value="{{ request('search') }}" name="search"
+                        placeholder="@lang('Search')" />
+                </form>
+            </div>
 
         </div>
         <div class="table-responsive">
