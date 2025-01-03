@@ -1,27 +1,27 @@
 @extends('admin.layouts.admin')
-@section('title', 'العملاء')
+@section('title', 'المشرفين')
 @section('content')
     <div class="main-side">
         <div class="main-title">
             <div class="small">الرئيسية</div>
-            <div class="large">العملاء</div>
+            <div class="large">المشرفين</div>
         </div>
         <x-alert-admin />
         <div class="bar-options d-flex align-items-center justify-content-between flex-wrap gap-1 mb-2">
             <div class="btn-holder d-flex align-items-center justify-content-start gap-1 mb-2">
-                <a href="{{ route('admin.users.create') }}" class="main-btn">
+                <a href="{{ route('admin.admins.create') }}" class="main-btn">
                     اضافة
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
-                <a href="{{ route('admin.users.index') }}" type="button" class="main-btn btn-main-color">الكل:
-                    {{ App\Models\User::users()->count() }}</a>
-                <a href="{{ route('admin.users.index', ['status' => 'yes']) }}" type="button" class="btn btn-success">مفعل
+                <a href="{{ route('admin.admins.index') }}" type="button" class="main-btn btn-main-color">الكل:
+                    {{ App\Models\User::admins()->count() }}</a>
+                <a href="{{ route('admin.admins.index', ['status' => 'yes']) }}" type="button" class="btn btn-success">مفعل
                     :
-                    {{ App\Models\User::users()->active()->count() }}</a>
-                <a href="{{ route('admin.users.index', ['status' => 'no']) }}" type="button" class="btn btn-danger">غير
+                    {{ App\Models\User::admins()->active()->count() }}</a>
+                <a href="{{ route('admin.admins.index', ['status' => 'no']) }}" type="button" class="btn btn-danger">غير
                     مفعل :
-                    {{ App\Models\User::users()->inactive()->count() }}</a>
+                    {{ App\Models\User::admins()->inactive()->count() }}</a>
             </div>
             <div class="box-search">
                 <form action="">
@@ -41,7 +41,7 @@
                         <th>الاسم </th>
                         <th>الهاتف </th>
                         <th>البريد الالكتروني</th>
-                        <th>الطلبات</th>
+                        <th>الصلاحية</th>
                         <th>الحالة</th>
                         <th>@lang('Actions')</th>
                     </tr>
@@ -58,16 +58,18 @@
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->email }}</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm text-white mx-1">
-                                    {{ $item->orders->count() }}
-                                </a>
+                                @if (!empty($item->getRoleNames()))
+                                    @foreach ($item->getRoleNames() as $v)
+                                        <label class="badge bg-success">{{ $v }}</label>
+                                    @endforeach
+                                @endif
                             </td>
                             <td>
                                 <span class="badge bg-{{ $item->status->color() }}">{{ $item->status->name() }}</span>
                             </td>
                             <td>
                                 <div class="btn-holder d-flex align-items-center gap-3">
-                                    <a href="{{ route('admin.users.edit', $item->id) }}"
+                                    <a href="{{ route('admin.admins.edit', $item->id) }}"
                                         class="btn btn-primary btn-sm text-white mx-1">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
@@ -76,7 +78,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
-                                @include('admin.users.delete-modal', ['item' => $item])
+                                @include('admin.admins.delete-modal', ['item' => $item])
                             </td>
                         </tr>
                     @endforeach

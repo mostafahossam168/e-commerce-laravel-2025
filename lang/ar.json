@@ -29,6 +29,10 @@
     "Click to copy": "اضغط للنسخ",
     "Client Closed Request": "أغلق العميل الطلب",
     "Close": "إغلاق",
+    "read":"عرض",
+    "update":"تعديل",
+    "delete":"حذف",
+    "create":"انشاء",
     "Collapse": "طي",
     "Collapse All": "طي الكل",
     "Comment": "تعليق",
@@ -225,5 +229,12 @@
     "Web Server is Down": "خادم الويب متوقف",
     "Whoops!": "عذراً!",
     "Yes": "نعم",
+    "users": "العملاء",
+    "admins": "المشرفين",
+    "products": "المنتجات",
+    "categories": "الاقسام",
+    "home": "الرئيسية",
+    "settings": "الاعدادات",
+    "orders": "الطلبات",
     "You are receiving this email because we received a password reset request for your account.": "لقد استلمت هذا الإيميل لأننا استقبلنا طلباً لاستعادة كلمة مرور حسابك."
 }

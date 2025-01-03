@@ -1,29 +1,30 @@
 @extends('admin.layouts.admin')
-@section('title', 'تعديل عميل')
+@section('title', 'اضافة مشرف')
 @section('content')
     <div class="main-side">
         <x-alert-admin />
+
         <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
             <div class="main-title">
                 <div class="small">
                     الرئيسية
                 </div>
                 <div class="large">
-                    تعديل عميل : {{ $item->name }}
+                    اضافة مشرف
                 </div>
             </div>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">العملاء <i
+            <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary">المشرفين <i
                     class="fas fa-arrow-left-long"></i></a>
         </div>
-        <form action="{{ route('admin.users.update', $item->id) }}" method="post" enctype="multipart/form-data">
+
+        <form action="{{ route('admin.admins.store') }}" method="post" enctype="multipart/form-data">
             <div class="row g-3">
                 @csrf
-                @method('PUT')
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="inp-holder">
                         <label class="special-input">
                             <span>الاسم</span>
-                            <input type="text" name="name" value="{{ $item->name }}" class="form-control">
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control">
                         </label>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                     <div class="inp-holder">
                         <label class="special-input">
                             <span>البريد الالكتروني</span>
-                            <input type="email" name="email" value="{{ $item->email }}" class="form-control">
+                            <input type="email" name="email" value="{{ old('email') }}" class="form-control">
                         </label>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                     <div class="inp-holder">
                         <label class="special-input">
                             <span>الهاتف</span>
-                            <input type="text" name="phone" value="{{ $item->phone }}" class="form-control">
+                            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control">
                         </label>
                     </div>
                 </div>
@@ -49,8 +50,21 @@
                         <select class="form-select" name="status">
                             <option>--- اختر ---</option>
                             @foreach (collect(\App\enums\Status::cases())->toArray() as $status)
-                                <option value="{{ $status }}" @selected($item->status == $status)>
+                                <option value="{{ $status }}" @selected(old('status') == $status)>
                                     {{ $status->name() }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </label>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <label class="special-input">
+                        <span>الصلاحية</span>
+                        <select class="form-select" name="role">
+                            <option>--- اختر ---</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" @selected(old('role') == $role->name)>
+                                    {{ $role->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -64,16 +78,20 @@
                         </label>
                     </div>
                 </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="inp-holder">
+                        <label class="special-input">
+                            <span>تاكيد الباسورد</span>
+                            <input type="password" name="password_confirmation" class="form-control">
+                        </label>
+                    </div>
+                </div>
 
                 <div class="col-12 col-md-4 col-lg-3">
                     <label class="special-input">
                         <span>الصوره </span>
                         <input class="form-control" name="image" type="file" accept="image/*">
                     </label>
-                    @if ($item->image)
-                        <img src="{{ display_file($item->image->path) }}" alt="" class="img-thumbnail img-preview"
-                            width="60px">
-                    @endif
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="btn-holder mt-2">

@@ -28,14 +28,44 @@
                 </div>
             </a>
         </li>
-        <li class="list-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-            <a href="{{ route('admin.users.index') }}" class="">
+
+        <li class="list-item ">
+            <a data-bs-toggle="collapse" href="#users"
+                aria-expanded="{{ request()->routeIs('admin.users.*') || request()->routeIs('admin.admins.*') || request()->routeIs('admin.roles.*') ? 'true' : 'false' }}">
                 <div>
                     <i class="fa-solid fa-users"></i>
-                    العملاء
+                    المستخدمين
                 </div>
+                <i class="fa-solid fa-angle-right arrow"></i>
             </a>
         </li>
+        <div id="users"
+            class="collapse item-collapse {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.admins.*') || request()->routeIs('admin.roles.*') ? 'show' : '' }} ">
+            <li class="list-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users.index') }}" class="">
+                    <div>
+                        <i class="fa-solid fa-user-large"></i>
+                        العملاء
+                    </div>
+                </a>
+            </li>
+            <li class="list-item {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.admins.index') }}" class="">
+                    <div>
+                        <i class="fa-solid fa-user-large"></i>
+                        المشرفين
+                    </div>
+                </a>
+            </li>
+            <li class="list-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.roles.index') }}" class="">
+                    <div>
+                        <i class="fa-solid fa-user-large"></i>
+                        الصلاحيات
+                    </div>
+                </a>
+            </li>
+        </div>
 
 
         <li class="list-item {{ request()->routeIs('admin.contacts') ? 'active' : '' }}">
@@ -49,6 +79,9 @@
             </a>
         </li>
     </ul>
+
+
+
     {{-- <ul class="list">
         <li class="list-item {{ request()->routeIs('admin.home') ? 'active' : '' }}">
             <a href="{{ route('admin.home') }}">

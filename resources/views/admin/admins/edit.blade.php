@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin')
-@section('title', 'تعديل عميل')
+@section('title', 'تعديل مشرف')
 @section('content')
     <div class="main-side">
         <x-alert-admin />
@@ -9,13 +9,13 @@
                     الرئيسية
                 </div>
                 <div class="large">
-                    تعديل عميل : {{ $item->name }}
+                    تعديل مشرف : {{ $item->name }}
                 </div>
             </div>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">العملاء <i
+            <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary">المشرفيين <i
                     class="fas fa-arrow-left-long"></i></a>
         </div>
-        <form action="{{ route('admin.users.update', $item->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.admins.update', $item->id) }}" method="post" enctype="multipart/form-data">
             <div class="row g-3">
                 @csrf
                 @method('PUT')
@@ -51,6 +51,20 @@
                             @foreach (collect(\App\enums\Status::cases())->toArray() as $status)
                                 <option value="{{ $status }}" @selected($item->status == $status)>
                                     {{ $status->name() }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </label>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <label class="special-input">
+                        <span>الصلاحية</span>
+                        <select class="form-select" name="role">
+                            <option>--- اختر ---</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" @selected($item->roles->first()?->pivot->role_id == $role->id)>
+                                    {{ $role->name }}
                                 </option>
                             @endforeach
                         </select>

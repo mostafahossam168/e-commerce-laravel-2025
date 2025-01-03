@@ -83,10 +83,6 @@ class ProductController extends Controller
 
         $images = [];
         if ($request->images) {
-            foreach ($product->images as $image) {
-                delete_file($image->path);
-                $image->delete();
-            }
             foreach ($request->images as $image) {
                 $images[] = store_file($image, 'products');
             }

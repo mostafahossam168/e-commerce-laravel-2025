@@ -56,8 +56,14 @@ class ProductRepository implements ProductInterface
         $data = $request['data'];
         $product = Product::find($id);
         $product->update($data);
-        foreach ($images as $image) {
-            $product->images()->create(['path' => $image]);
+        if ($images) {
+            foreach ($product->images as $image) {
+                delete_file($image->path);
+                $image->delete();
+            }
+            foreach ($images as $image) {
+                $product->images()->create(['path' => $image]);
+            }
         }
         return $product;
     }

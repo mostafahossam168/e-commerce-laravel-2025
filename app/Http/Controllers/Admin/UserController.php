@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Interfaces\UserInterface;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = $request->except('password', 'image', 'password_confirmation');
+        $data['password'] = bcrypt($request->password);
+        $data['type'] = 'user';
+        if ($request->image) {
+            $image = store_file($request->image, 'users');
+        }
+        $this->itemRepository->store(['data' => $data, 'image' => $image ?? '']);
+        return redirect()->route('admin.users.index')->with('success', 'تم الحفظ بنجاح');
     }
 
     /**
@@ -51,15 +59,24 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item =  $this->itemRepository->edit($id);
+        return view('admin.users.edit', compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        //
+        $data = $request->except('password', 'image');
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        if ($request->image) {
+            $image = store_file($request->image, 'users');
+        }
+        $this->itemRepository->update(['data' => $data, 'image' => $image ?? ''], $id);
+        return redirect()->route('admin.users.index')->with('success', 'تم الحفظ بنجاح');
     }
 
     /**
@@ -67,6 +84,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->itemRepository->destroy($id);
+        return back()->with('success', 'تم حذف العمىل بنجاح');
     }
 }

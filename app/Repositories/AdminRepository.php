@@ -2,14 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\UserInterface;
+use App\Interfaces\AdminInterface;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
-class UserRepository implements UserInterface
+class AdminRepository implements AdminInterface
 {
+
+
     public function index()
     {
-        return User::users()->where(function ($q) {
+        return User::admins()->where(function ($q) {
             if (request('search')) {
                 $q->where('name', 'LIKE', '%' . request('search') . '%')
                     ->orWhere('email', 'LIKE', '%' . request('search') . '%')
@@ -17,24 +20,45 @@ class UserRepository implements UserInterface
             }
         })->latest()->paginate(15);
     }
+
+
+
     public function show($id)
     {
         return User::findOrFail($id);
     }
 
-    public function create() {}
+
+
+    public function create()
+    {
+        return Role::all();
+    }
+
+
+
     public function store($request)
     {
         $user = User::create($request['data']);
         if ($request['image']) {
             $user->image()->create(['path' => $request['image']]);
         }
+        if ($request['role']) {
+            $user->assignRole($request['role']);
+        }
         return $user;
     }
     public function edit($id)
     {
-        return User::findOrFail($id);
+        $item = User::findOrFail($id);
+        $roles =  Role::all();
+        return [
+            'item' => $item,
+            'roles' => $roles
+        ];
     }
+
+
     public function update($request, $id)
     {
         $user = User::findOrFail($id);
@@ -44,8 +68,14 @@ class UserRepository implements UserInterface
             $user->image()->delete();
             $user->image()->create(['path' => $request['image']]);
         }
+
+        if ($request['role']) {
+            $user->syncRoles($request['role']);
+        }
         return $user;
     }
+
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
