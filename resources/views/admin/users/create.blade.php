@@ -48,7 +48,7 @@
                     <label class="special-input">
                         <span>الحالة</span>
                         <select class="form-select" name="status">
-                            <option>--- اختر ---</option>
+                            <option value="">--- اختر ---</option>
                             @foreach (collect(\App\enums\Status::cases())->toArray() as $status)
                                 <option value="{{ $status }}" @selected(old('status') == $status)>
                                     {{ $status->name() }}

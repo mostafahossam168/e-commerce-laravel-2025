@@ -38,6 +38,7 @@ class UserController extends Controller
     {
         $data = $request->except('password', 'image', 'password_confirmation');
         $data['password'] = bcrypt($request->password);
+        $data['status'] = $request->status ?? 1;
         $data['type'] = 'user';
         if ($request->image) {
             $image = store_file($request->image, 'users');

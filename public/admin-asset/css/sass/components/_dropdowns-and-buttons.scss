@@ -130,3 +130,58 @@
     font-size: 27px;
     justify-content: center;
 }
+
+.badge-exclamation {
+  border: 1px solid black;
+  color: black;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+}
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.accepted-bg {
+  background-color: #28a745; /* لون أخضر */
+  color: white; /* لون النص أبيض */
+}
+
+.pending-bg {
+  background-color: #ffc107; /* لون أصفر */
+  color: black; /* لون النص أسود */
+}
+
+.rejected-bg {
+  background-color: #dc3545; /* لون أحمر */
+  color: white; /* لون النص أبيض */
+}
+.btn-tab {
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  white-space: nowrap;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  width: fit-content;
+  transition: 300ms;
+  position: relative;
+  padding: 8px 13px;
+    background-color: white;
+    border: 1px solid $orange-color;
+    color: $orange-color;
+    &:hover,&.active {
+      background-color: $orange-color;
+      border: 1px solid $orange-color;
+      color: white;
+    }
+}

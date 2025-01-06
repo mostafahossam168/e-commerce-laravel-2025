@@ -2,34 +2,48 @@
 
 namespace App\Services;
 
-
+use Illuminate\Support\Facades\DB;
 
 class CartService
 {
+
     public static function getCart()
     {
-
-
-        // if (auth()->check()) {
-        //     return 1;
-        // } else {
-        //     return 0;
-        // }
-
-        $user = auth('sanctum')->user();
-        if ($user) {
-            $carts = $user->carts()->get();
-            return $carts;
+        $userId = auth('api')->id();
+        $query = DB::table('carts')
+            ->where('ip', request()->ip())
+            ->where('session_id', request()->session()->getId());
+        if ($userId) {
+            $query->where('user_id', $userId);
         }
-        return 10;
-        // return Cart::with('items')
-        //     ->withCount('items')
-        //     ->where('session_id', \request()->session()->getId())
-        //     ->firstOrCreate([
-        //         'ip' => request()->ip(),
-        //         'session_id' => \request()->session()->getId()
-        //     ]);
+        $products = $query->get();
+        $data['products'] = '';
+        $data['subtotal'] = $products->sum(function ($product) {
+            return $product->price * $product->qty;
+        });
+        $data['tax'] =  setting('is_tax') ? ($data['subtotal'] * setting('tax') / 100) : 0;
+        $data['total'] = $data['subtotal'] +  $data['tax'];
+
+        return $data;
     }
+
+
+
+    public static function deleteCart()
+    {
+        $userId = auth('api')->id();
+        DB::table('carts')
+            ->where('ip', request()->ip())
+            ->where('session_id', request()->session()->getId())
+            ->where('user_id', $userId)->delete();
+
+        return true;
+    }
+
+
+
+
+
 
     public static function addToCart($id, $qty = 1, $force = false)
     {

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RateController;
 use Illuminate\Http\Request;
@@ -47,6 +48,13 @@ Route::group(['middleware' => StartSession::class, 'prefix' => 'favorites', 'con
 Route::group(['prefix' => 'categories', 'controller' => CategoryController::class], function () {
     Route::get('/index', 'index');
     Route::get('/show/{id}', 'show');
+});
+
+
+Route::group(['middleware' => ['auth:api', StartSession::class], 'prefix' => 'orders', 'controller' => OrderController::class], function () {
+    Route::get('/index', 'index');
+    Route::get('/show/{id}', 'show');
+    Route::post('/store', 'store');
 });
 
 Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {

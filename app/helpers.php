@@ -29,3 +29,15 @@ function arabic_time($time)
     }
     return str_replace(['AM', 'PM'], ["ص", "م"], \Carbon\Carbon::parse($time)->format('g:i A'));
 }
+
+
+function format_date_time($datetime)
+{
+    return \Carbon\Carbon::parse($datetime)->format('Y-m-d g:i A');
+}
+
+function return_diff_for_humans($datetime)
+{
+    \Carbon\Carbon::setLocale('ar');
+    return \Carbon\Carbon::parse($datetime)->diffForHumans();
+}

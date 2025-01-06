@@ -35,6 +35,7 @@ class UserRequest extends FormRequest
             case 'PATCH': {
                     return [
                         'name' => 'required',
+                        'status' => 'boolean',
                         'phone' => 'required|numeric|unique:users,phone,' . $this->user,
                         'email' => 'required|email|unique:users,email,' . $this->user,
                         'image' => 'nullable|mimes:png,jpg',

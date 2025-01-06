@@ -41,7 +41,7 @@
                     <label class="special-input">
                         <span>القسم</span>
                         <select class="form-select" name="category_id">
-                            <option>--- اختر ---</option>
+                            <option value="">--- اختر ---</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @selected($category->id == $item->category_id)>{{ $category->name }}
                                 </option>
@@ -53,7 +53,7 @@
                     <label class="special-input">
                         <span>الحالة</span>
                         <select class="form-select" name="status">
-                            <option>--- اختر ---</option>
+                            <option value="">--- اختر ---</option>
                             @foreach (collect(\App\enums\Status::cases())->toArray() as $status)
                                 <option value="{{ $status }}" @selected($status == $item->status)>
                                     {{ $status->name() }}

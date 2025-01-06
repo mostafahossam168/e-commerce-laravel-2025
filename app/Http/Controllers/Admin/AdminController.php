@@ -37,6 +37,7 @@ class AdminController extends Controller
     public function store(AdminRequest $request)
     {
         $data = $request->except('password', 'image', 'password_confirmation', 'role');
+        $data['status'] = $request->status ?? 1;
         $data['password'] = bcrypt($request->password);
         $data['type'] = 'admin';
         if ($request->image) {
@@ -67,7 +68,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminRequest $request, string $id)
     {
         $data = $request->except('password', 'image', 'role');
         if ($request->password) {

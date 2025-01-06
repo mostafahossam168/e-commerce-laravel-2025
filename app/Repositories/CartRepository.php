@@ -27,9 +27,8 @@ class CartRepository implements CartInterface
         $data['subtotal'] = $products->sum(function ($product) {
             return $product->price * $product->qty;
         });
-        $data['total'] = $data['subtotal'];
-        // $data['tax'] =  setting('is_tax') ? ($data['subtotal'] * setting('tax') / 100) : 0;
-
+        $data['tax'] =  setting('is_tax') ? ($data['subtotal'] * setting('tax') / 100) : 0;
+        $data['total'] = $data['subtotal'] +  $data['tax'];
         return $data;
     }
 

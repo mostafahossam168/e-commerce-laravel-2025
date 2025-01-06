@@ -67,7 +67,15 @@
             </li>
         </div>
 
-
+        <li class="list-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.orders.index') }}" class="">
+                <div>
+                    <i class="fa-solid fa-shop"></i>
+                    الطلبات
+                    <div class="main-badge">{{ \App\Models\Order::count() }}</div>
+                </div>
+            </a>
+        </li>
         <li class="list-item {{ request()->routeIs('admin.contacts') ? 'active' : '' }}">
             <a href="{{ route('admin.contacts') }}" class="">
                 <div>

@@ -14,8 +14,8 @@
         align-items: center;
         gap: 12px;
         .img {
-            width: 150px;
-            height: auto;
+            width: auto;
+            height: 48px;
         }
         .text {
             color: #737373;
@@ -54,8 +54,8 @@
         }
     }
     .info-user {
-      padding-right: 2rem;
-      border-right: 1px solid #CCCCCC;
+        padding-right: 2rem;
+        border-right: 1px solid #cccccc;
         .content {
             &::after {
                 content: none;
