@@ -53,7 +53,16 @@
                             <td>{{ $item->number }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->phone }}</td>
-                            <td><span class="badge bg-{{ $item->status->color() }}">{{ $item->status->name() }}</span>
+                            <td>
+                                <span class="badge bg-{{ $item->status->color() }}">{{ $item->status->name() }}</span>
+                                @if ($item->status->name() == 'ملغى')
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        title="سبب الرفض" data-bs-target="#resone{{ $item->id }}">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    @include('admin.orders.resone-modal', ['item' => $item])
+                                @endif
+
                             </td>
                             <td>{{ $item->subtotal }}</td>
                             <td>{{ $item->tax }}</td>
@@ -61,13 +70,32 @@
 
                             <td class="d-flex gap-2">
 
+                                @if ($item->status->name() == 'بالانتظار')
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                        title="تاكيد الطلب" data-bs-target="#confirm{{ $item->id }}">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                    @include('admin.orders.confirm-modal', ['item' => $item])
+
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        title="الغاء الطلب" data-bs-target="#canceled{{ $item->id }}">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                    @include('admin.orders.canceled-modal', ['item' => $item])
+                                @endif
+
+
+                                @if ($item->status->name() == 'تحت التجهيز')
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        title="اكتمال الطلب" data-bs-target="#completed{{ $item->id }}">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </button>
+                                    @include('admin.orders.completed-modal', ['item' => $item])
+                                @endif
+
                                 <a class="btn btn-info btn-sm text-white mx-1"
                                     href="{{ route('admin.orders.show', $item->id) }}">
                                     <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a class="btn btn-primary btn-sm text-white mx-1"
-                                    href="{{ route('admin.orders.edit', $item->id) }}">
-                                    <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $item->id }}">

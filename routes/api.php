@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RateController;
@@ -55,6 +56,10 @@ Route::group(['middleware' => ['auth:api', StartSession::class], 'prefix' => 'or
     Route::get('/index', 'index');
     Route::get('/show/{id}', 'show');
     Route::post('/store', 'store');
+});
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'notifications', 'controller' => NotificationController::class], function () {
+    Route::get('/index', 'index');
+    Route::post('/mark-as-read', 'markAsRead');
 });
 
 Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {

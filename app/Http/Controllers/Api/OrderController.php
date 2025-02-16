@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         if (!auth('api')->user()->carts->count()) {
-            return $this->returnError('السلة فارغة');
+            return $this->returnError('لايمكن انشاء الطلب والسله فارغة');
         }
         $this->itemRepository->store($request->all());
         return $this->returnSuccessMessage('تم انشاءالطلب بنجاح');

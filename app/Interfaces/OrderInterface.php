@@ -12,4 +12,8 @@ interface OrderInterface
     public function edit($id);
     public function update($request, $id);
     public function destroy($id);
+
+    public function confirm($id);
+    public function canceled($id, $request);
+    public function complete($id);
 }

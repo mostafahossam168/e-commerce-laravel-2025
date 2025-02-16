@@ -41,31 +41,35 @@
         </li>
         <div id="users"
             class="collapse item-collapse {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.admins.*') || request()->routeIs('admin.roles.*') ? 'show' : '' }} ">
+
             <li class="list-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.users.index') }}" class="">
                     <div>
-                        <i class="fa-solid fa-user-large"></i>
+                        <i class="fa-solid fa-users"></i>
                         العملاء
                     </div>
                 </a>
             </li>
+
             <li class="list-item {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.admins.index') }}" class="">
                     <div>
-                        <i class="fa-solid fa-user-large"></i>
+                        <i class="fa-solid fa-user-tie"></i>
                         المشرفين
                     </div>
                 </a>
             </li>
+
             <li class="list-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.roles.index') }}" class="">
                     <div>
-                        <i class="fa-solid fa-user-large"></i>
+                        <i class="fa-solid fa-shield-halved"></i>
                         الصلاحيات
                     </div>
                 </a>
             </li>
         </div>
+
 
         <li class="list-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
             <a href="{{ route('admin.orders.index') }}" class="">

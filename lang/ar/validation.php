@@ -193,6 +193,7 @@ return [
         'gender'                   => 'النوع',
         'grand_prize'              => 'الجائزة الكبرى',
         'group'                    => 'مجموعة',
+        'resone_canceled'                    => 'سبب الرفض',
         'hour'                     => 'ساعة',
         'image'                    => 'صورة',
         'image_desktop'            => 'صورة سطح المكتب',

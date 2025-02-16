@@ -22,6 +22,11 @@ Route::middleware('web')->group(function () {
         Route::resource('/categories', CategoryController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/orders', OrderController::class);
+        Route::group(['prefix' => 'orders', 'as' => 'orders.', 'controller' => OrderController::class], function () {
+            Route::PATCH('/canceled/{id}', 'canceled')->name('canceled');
+            Route::PUT('/confirm/{id}', 'confirm')->name('confirm');
+            Route::PUT('/complete/{id}', 'complete')->name('complete');
+        });
         Route::get('/contacts', [ContactUsController::class, 'index'])->name('contacts');
         Route::delete('/contacts/delete/{id}', [ContactUsController::class, 'destroy'])->name('contacts.destroy');
     });

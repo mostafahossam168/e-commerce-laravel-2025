@@ -25,7 +25,7 @@ class CategoryRepository  implements CategoryInterface
     }
     public function show($id)
     {
-        return Category::findOrFail($id);
+        return Category::find($id);
     }
     public function store($request)
     {
@@ -33,12 +33,12 @@ class CategoryRepository  implements CategoryInterface
     }
     public function update($request, $id)
     {
-        $category =  Category::findOrFail($id);
+        $category =  Category::find($id);
         return $category->update($request);
     }
     public function destroy($id)
     {
-        $category =  Category::findOrFail($id);
+        $category =  Category::find($id);
         return  $category->delete();
     }
 }

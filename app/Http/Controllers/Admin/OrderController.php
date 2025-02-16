@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Interfaces\OrderInterface;
 use App\Http\Requests\OrderRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -74,5 +75,23 @@ class OrderController extends Controller
     {
         $this->itemRepository->destroy($id);
         return back()->with('success', 'تم حذف الطلب بنجاح ');
+    }
+
+
+
+    public function confirm($id)
+    {
+        $this->itemRepository->confirm($id);
+        return back()->with('success', 'تم تاكيد الطلب بنجاح ');
+    }
+    public function canceled($id, OrderRequest $request)
+    {
+        $this->itemRepository->canceled($id, $request);
+        return back()->with('success', 'تم الغاء الطلب بنجاح ');
+    }
+    public function complete($id)
+    {
+        $this->itemRepository->complete($id);
+        return back()->with('success', 'تم اكتمال الطلب بنجاح ');
     }
 }

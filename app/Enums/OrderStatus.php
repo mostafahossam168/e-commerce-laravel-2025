@@ -21,8 +21,8 @@ enum OrderStatus: string
     {
         return match ($this) {
             self::PENDEING => 'warning',
-            self::PREPARING => 'primary',
-            self::COMPLETED => 'success',
+            self::PREPARING => 'success',
+            self::COMPLETED => 'primary',
             self::CANCELED => 'danger',
         };
     }

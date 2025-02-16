@@ -76,4 +76,27 @@ class OrderRepository implements OrderInterface
         $order =  Order::findOrFail($id);
         return  $order->delete();
     }
+
+
+
+
+
+    public function confirm($id)
+    {
+        $order =  Order::findOrFail($id);
+        return $order->update(['status' => "preparing"]);
+    }
+    public function canceled($id, $request)
+    {
+        $order =  Order::findOrFail($id);
+        return $order->update([
+            'status' => "canceled",
+            'resone_canceled' => $request->resone_canceled,
+        ]);
+    }
+    public function complete($id)
+    {
+        $order =  Order::findOrFail($id);
+        return $order->update(['status' => "completed"]);
+    }
 }

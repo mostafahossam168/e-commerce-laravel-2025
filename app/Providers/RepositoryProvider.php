@@ -18,11 +18,13 @@ use App\Interfaces\FavoriteInterface;
 use App\Repositories\AdminRepository;
 use App\Repositories\OrderRepository;
 use App\Interfaces\ContactUsInterface;
+use App\Interfaces\NotificationInterface;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\CategoryRepository;
 use App\Repositories\FavoriteRepository;
 use App\Repositories\ContactUsRepository;
+use App\Repositories\NotificationRepository;
 
 class RepositoryProvider extends ServiceProvider
 {
@@ -41,6 +43,7 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(AdminInterface::class, AdminRepository::class);
         $this->app->bind(RoleInterface::class, RoleRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
+        $this->app->bind(NotificationInterface::class, NotificationRepository::class);
     }
 
     /**
