@@ -18,6 +18,7 @@ class FCMClient
             $dataResult[$key] = (string) $val;
         }
         $to = $device_token->token;
+        // dd($to);
         Log::info(json_encode(['data' => $data, 'dataResult' => $dataResult], JSON_UNESCAPED_UNICODE));
         $arr_data = [
             'message' => [
@@ -47,7 +48,7 @@ class FCMClient
                 ],
             ]
         ];
-        // dd($arr_data);
+
         $dataString = json_encode($arr_data);
         Log::info($dataString);
         // Log::info($dataString);
@@ -80,16 +81,16 @@ class FCMClient
     {
         $data = [
             "type" => "service_account",
-            "project_id" => "son-7f11f",
-            "private_key_id" => "a3dcda2a993e5b198d4ee418d5fc7cb5ec8cf7c2",
-            "private_key" => "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCty+j48ClQFpFj\nZSGUyuGwTT0imzyBfDHByuTtCMuhEaAog2NJUItr2tmKUgp12CWK1zM9nBN5qrTq\nOrI92OuINVzB5UXc8yW1+pK93W0JRmre7fGUuh6bNeokAQU4WzitE2RqVBSSv18f\nXoEXxdHlSA3w8eRYajnMZFZFjX9LT2dtyakmcyryq3FmYUGLxzhEtuKMl+SXD8WP\ndmddurZhGJ/nnZIm5jBzJTT7AC/Wui6NLfbeyWpEDr+pYToz+9EuztMWG4y/giIP\nvwMMWrNXOb95GtAO09mHJhaB+abSRmTzXrjieYwIIb5SCtl2GlPpPXlr/NvyytvO\nD8gFiJM9AgMBAAECggEAFopUdhrRxNsUcp9uZkmU0USHOgqHo6SLoH5zx+FE5agv\nTSnTMfJCDtQ0tBmVVTjaD6J++Q3ZwcUXzywbK2XLkGAZXmVhtPkNCkfMCddiuZn6\nKN0T4K3t48PvkMlYF7nPBTV3Z8ntXCX5TIx5ci+cHCBG/Jmmu6fVRLK7tKwYFxhn\nlzKaxgNxTZU3DD2DVV1UJyZCKWjhuoMkyLIBjh8ki08G6WWmZBcbdoSXlz1+pxKr\nx+1Mq2nRPrrGVMRN89aspDSy9vpbCwSMnENV5rXSFUMncPRz8vzpzgvnhldo3q4B\noZAZeBOeVQRdJ/K70rejDk0V3+gDbSzfijQv1/+EkQKBgQDnYCcT7n1JqrZpqwNG\nRGA9sXIhAyTiXGZumAwmors8x59IsPsDtdxCXgkHeaG2YpP1iBdSEwHmWonGOpja\n+7gOIQdaherKJFDbzTaZax8eEoJckUL1BdND0mNV9LDn7LgRDyKNhB3mVx2cuIq/\nfF5XTBPOvz+3piFlNSt9kQs5UQKBgQDASwLCf42hVrMatTqHoo0V9CPVqJcrW/Qu\n0Nbrpje9LAGLi/GhqFBaYosMX1romqdUiakILkZeqWOSMVRLyf1JAIgmLRscomNV\nyqmolW1YWee2gutOutGXT6WDL31PrH4bZvM2vZUnXslhPPrGC09H390P/Hk26DM5\n+zq+obeALQKBgQCWAIhVK7CeKcbJCs28qGecl4XeUSOAfVcLLBf0lFu/M8vYXKTf\n6u85N62y4vAsRgyWifxUgW4h4WCg2yxuC/NvdYpG7bsiAhlJ5ukW3ZP28xkA2kwG\nfhhRR/yOpWxrb9SFesJz7MtVofTYvet16TNgdToCN4sfjNzpuGbRqU8VgQKBgHio\nGIk2RAYyQpvFj34/7ssRr9KGwKQCRMuDWvfuChd3H1kSbIGE/TZZkuomgwJk2A3h\neuCZOKp5GvNGZKBRk85UuRlLQDHNawsP6TjQ2hWQBCavKzrxWkXZQf94suZlU5Oa\nG44Dky1q+m07OBdATXTJ8Qnw35YmSM5e51NqYZvZAoGBAOY4M6F41qdlx1gWisFc\nGnzWUC48aPVBAK201EmzE134yLjWxxRm3laYB49w8k3HIF0jTKE7EfEenfCiUo1v\nd5ZLXm2J2xsmseSrID84XE4huQH6YWvA7GoXQ3kaMDrlkrc+1d3lGr1QZVgHGqXE\nlMku4CtQxr7W1/G4AIsngND2\n-----END PRIVATE KEY-----\n",
-            "client_email" => "firebase-adminsdk-x4vz8@son-7f11f.iam.gserviceaccount.com",
-            "client_id" => "116670676265251312335",
-            "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
+            "project_id" =>  "laravel11-e9b7b",
+            "private_key_id" =>  "54acce245caa68f1ec452f6e4b74867f32d14128",
+            "private_key" =>  "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7wztO5IlU/9Sf\nsPyba8VM6NkzhlnlDABn4g+0R7Da0uCmZlVv2W49Q0dPmHX7WCtknIoMlZ1g1cvG\n0qWYBjhYYZJN/E1Wek1kUyQ4D+Gll87Z3Y7gt21rTrrgWVQzud/szfbB5ZBDURn2\ng2/S+aECoBGbcCUF8aa46nCbS5yOIeuKJPsmQmazcomANZ47FXkyOkrXSJxOa0HU\n7Ythe672nOLSBCV4ey1Vv+DP90Dp5crY3W26z23ChXd+eU7YYhVNPiw/y8i7++RH\n81/fhasflsbNoziYz+7PJgNYfh6psWXGfSwE8UgkghXoDQh5ysvHmyMSIIys6Osa\n4R1rX6KdAgMBAAECggEAJ/X5HWVORSTdn88PNBTPvPqhn3GsmC7htzpJlVjcrvXK\nkh+dd1yTNb6n4qzUD1ZIhfU6/EqrX/ygjgQu8hgAze6WMLrNyuXkqsF3J+dZYuDY\nSU36JqFjTD9JTo40eX3JxqBfMA0nkuwj1m9K0WAHgIOIu8g2WPmBPkHHDYYeH7GD\nBti3gnKZZqzSPdDHkLyQMRlERH4pMYov4Bq7WIwFZFM70QF+7HkUXziLDWV5NarI\nNDSJrk2iZoZi5by61Ngt1tpfOrG/KkDNwLTTrnGlYwQrG1neSRjQ6gv/teg8Fr2C\no7uZN7/V+C2+VgSyNLW9FPUDjy9lDfOqiTibq4O0AQKBgQDj/krEYeksuY5dEuTt\nMvT+yVbmqTvYDrI2LvUjtzhhm+x9SmYSKFCiXeAz28Yo2E2ElM4V4cL1i3maYAgu\n9veuHkiHWCZ5ONTwJEkb45qzOruZb96h9RDTZIvCeXqgL92Y8+upndmOPw77JEt5\npTK0yVelsV/FNX28ijRdpUmRQQKBgQDS083pCQbbZL5ZA+iQHR8Q9Fnb42pEXVIX\nR4KVRPYIjrqsE+P35JzDDV4g/P3y761Pdh2f48eqkz3oM9AKV0QH6GdA0eWWpuf2\niMjMn679roAHkOuwWqQgbfaBJe8fDfNX7BNv/MSDyeyPpYbSRgWqlRgXeTg4y5zy\n3Kzz+FBeXQKBgQDiGOxMlEyI7fsgkfw0vrP3d/OWC34tZWWWFjtEkA55vgdouL9A\ngnp0imQtCWYaW2eEc41sZdbRat/NGC8FZCV7psyGbAS7coC5JULbRXvFAhnIsAg4\n1K869BslYRMaiF1ZsYujScbWKfLRW8z9dbYzUvh4eM5g5AstTmFf/OpYAQKBgHKW\nNABIq7Vq2BpBiZFqgowQgxaEUCnAHvIQJ+VBige0q7kDRpBhbOKGzXZYix4TLrtV\nk1xnzQnk5WzjXFuCerNhmV0duA9dwA264oh08gNnaKa0GaXMXhBSM/yVxZW3W1+a\nLCZd1+FZSn34lYKMFGBWkLWRaQFViYRmdIpVmDjxAoGAcBoeDZGcKZJT55lKff81\n8oF1KN5zWMRhR1ySZ5hpDPVGPbbKslVjbEmPZX12zl3vtogrveAUJHkakrZN5qbj\n7tKi1vUpjZr2kkJLgiKwn6YzZZxiRJD92D4OSky+/IkEuHd+lx1HSmPVlroa8rpb\n+awyJOnSPAj7PvYiL+lv5Eo=\n-----END PRIVATE KEY-----\n",
+            "client_email" =>  "firebase-adminsdk-fbsvc@laravel11-e9b7b.iam.gserviceaccount.com",
+            "client_id" => "103108069300771254981",
+            "auth_uri" =>  "https://accounts.google.com/o/oauth2/auth",
             "token_uri" => "https://oauth2.googleapis.com/token",
-            "auth_provider_x509_cert_url" => "https://www.googleapis.com/oauth2/v1/certs",
-            "client_x509_cert_url" => "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-x4vz8%40son-7f11f.iam.gserviceaccount.com",
-            "universe_domain" => "googleapis.com",
+            "auth_provider_x509_cert_url" =>  "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url" =>  "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40laravel11-e9b7b.iam.gserviceaccount.com",
+            "universe_domain" =>  "googleapis.com"
         ];
 
         $client = new Google_Client();

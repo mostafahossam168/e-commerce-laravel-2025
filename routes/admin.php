@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\NotificationController;
 
 Route::middleware('web')->group(function () {
     Route::view('login', 'admin.login')->middleware('admin_guest')->name('login');
@@ -29,5 +30,6 @@ Route::middleware('web')->group(function () {
         });
         Route::get('/contacts', [ContactUsController::class, 'index'])->name('contacts');
         Route::delete('/contacts/delete/{id}', [ContactUsController::class, 'destroy'])->name('contacts.destroy');
+        Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     });
 });

@@ -81,11 +81,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function fcm_token()
+    public function fcm_tokens()
     {
-        return $this->hasOne(FcmToken::class);
+        return $this->hasMany(FcmToken::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
     /**
      * Get the attributes that should be cast.
      *

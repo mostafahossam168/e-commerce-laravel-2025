@@ -2,10 +2,12 @@
 
 namespace App\Observers;
 
-use App\Models\Notification;
-use App\Models\Order;
 use App\Models\User;
+use App\Models\Order;
+use App\Events\TestEvent;
+use App\Models\Notification;
 use App\Services\CartService;
+use App\Events\NewNotificationEvent;
 
 class OrderObserver
 {
@@ -16,7 +18,7 @@ class OrderObserver
     {
         $admins = User::admins()->select('id')->get();
         foreach ($admins as $admin) {
-            Notification::send($admin->id, " تم اضافة طلب جديد رقم {$order->number} ", route('admin.orders.index'));
+            Notification::send($admin->id, " تم اضافة طلب جديد رقم {$order->number} ", route('admin.orders.show', $order->id));
         }
     }
 
@@ -33,7 +35,8 @@ class OrderObserver
         } elseif ($order->status->name() == 'مكتمل') {
             $message = "تم اكتمال طلبك رقم  $order->number";
         }
-        Notification::send($order->user?->id, $message, route('admin.orders.index'));
+        event(new NewNotificationEvent("Mostafa Hossam"));
+        Notification::send($order->user?->id, $message, route('admin.orders.show', $order->id));
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace App\Observers;
 
+use App\Models\User;
 use App\Models\ContactUs;
 use App\Models\Notification;
-use App\Models\User;
+use App\Events\NotificationEvent;
 
 class ContactUsObserver
 {

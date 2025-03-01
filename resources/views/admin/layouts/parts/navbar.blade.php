@@ -9,6 +9,12 @@
 
         <div class="d-flex align-items-center gap-2rem">
 
+
+            -<a href="{{ route('admin.notifications') }}" class="main-btn btn-orange">
+                <span class="main-badge">{{ auth()->user()->notifications()->unread()->count() }}</span>
+                الاشعارات
+                <i class="fa-solid fa-bell"></i>
+            </a>
             {{-- <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle btn-sm px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ LaravelLocalization::getSupportedLocales()[app()->getLocale()]['native'] }}

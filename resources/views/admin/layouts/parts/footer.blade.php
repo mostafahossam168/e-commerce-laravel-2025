@@ -29,4 +29,48 @@
         })
     })
 </script>
+
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+
+
+@if (auth()->check())
+    <script>
+        // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
+
+        var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
+            cluster: "{{ env('PUSHER_APP_CLUSTER') }}"
+        });
+
+        var channel = pusher.subscribe('laravel');
+        // channel.bind('pusher:subscription_succeeded', function(members) {
+        //     // alert('successfully subscribed!');
+        // });
+        channel.bind('new-notification-event', function(data) {
+            if (data.notification.user_id == "{{ auth()->id() }}") {
+                Swal.fire({
+                    title: data.notification.title,
+                    icon: 'info',
+                    html: `
+            <a class="btn btn-success btn-sm text-nowrap" href="{{ route('admin.notifications') }}">
+                    عرض كل الاشعارات
+            </a>`,
+                    showConfirmButton: false,
+                    position: 'center',
+                    padding: '13px',
+                    customClass: 'swal-alert-info',
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                })
+            }
+
+        });
+    </script>
+@endif
+
+
+
+
 @stack('js')

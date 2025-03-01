@@ -9,6 +9,7 @@ class NotificationRepository implements NotificationInterface
 {
     public function index()
     {
+        
         return  Notification::where('user_id', auth()->id())->latest()->paginate(30);
     }
     public function markAsRead()

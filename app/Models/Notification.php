@@ -20,6 +20,11 @@ class Notification extends Model
         $this->save();
     }
 
+    public function scopeUnRead($q)
+    {
+        return $q->whereNull('seen_at');
+    }
+
     public static function send($user_id, $title, $link = null)
     {
         return static::query()->create(compact('user_id', 'title', 'link'));

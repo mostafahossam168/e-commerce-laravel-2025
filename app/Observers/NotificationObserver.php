@@ -2,8 +2,12 @@
 
 namespace App\Observers;
 
-use App\Models\Notification;
+use App\Events\NewNotificationEvent;
+use Carbon\Carbon;
+use App\Events\TestEvent;
 use App\Services\FCMClient;
+use App\Models\Notification;
+use App\Events\NotificationEvent;
 
 class NotificationObserver
 {
@@ -12,17 +16,9 @@ class NotificationObserver
      */
     public function created(Notification $notification): void
     {
-
-        // event(new NotificationEvent($notification->user_id, $notification));
-
-        $tokens = $notification->user?->fcm_token;
+        event(new NewNotificationEvent($notification));
+        $tokens = $notification->user?->fcm_tokens;
         $data = [];
-        // if ($notification->type_id) {
-        //     $data['id'] = $notification->type_id;
-        // }
-        // if ($notification->type) {
-        //     $data['type'] = $notification->type;
-        // }
         foreach ($tokens ?? [] as $token) {
             FCMClient::send($token, $notification, $data);
         }

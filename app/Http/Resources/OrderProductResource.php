@@ -19,7 +19,7 @@ class OrderProductResource extends JsonResource
             'product_id' => $this->product_id,
             'product_name' => $this->product?->name,
             'product_image' => display_file($this->product?->main_image),
-            'price' => $this->price,
+            'price' => (float)$this->price,
             'qty' => $this->qty,
             'subtotal' => $this->price *  $this->qty,
         ];
