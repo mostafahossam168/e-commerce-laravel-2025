@@ -1,0 +1,25 @@
+.main-title {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+    gap: 1rem;
+    .small {
+        font-size: 18px;
+        color: #000000;
+        opacity: 0.5;
+    }
+    .large {
+        font-weight: 500;
+        font-size: 30px;
+        color: #000000;
+    }
+}
+.main-head {
+    color: $main-color;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 3px solid $main-color;
+    width: fit-content;
+    padding: 10px;
+    margin-bottom: 20px;
+}
