@@ -1,5 +1,6 @@
-@extends('admin.layouts.admin')
-@section('title', 'تعديل الصلاحية')
+@extends('admin.layouts.admin', [
+    'title' => 'تعديل الصلاحية',
+])
 @section('content')
     <div class="main-side">
         <div class="main-title">

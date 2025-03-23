@@ -1,5 +1,6 @@
-@extends('admin.layouts.admin')
-@section('title', 'عرض الطلب')
+@extends('admin.layouts.admin', [
+    'title' => 'عرض الطلب',
+])
 
 @section('content')
     <div class="main-side">
@@ -8,12 +9,10 @@
                 الطلب
                 {{ $item->number }}
             </h1>
-
             <div class="d-flex gap-3">
                 <div class="date">
                     {{ format_date_time($item->created_at) }}
                 </div>
-
             </div>
         </div>
         <div class="row mt-4 g-3">
@@ -128,10 +127,6 @@
                             </div>
                             <div class="md border-bottom-0 m-0">
                                 <div class="d-flex justify-content-between ">
-                                    {{-- <div class="text fs-12px">
-                                        <span> وقت التسليم : </span>
-                                        {{ format_date_time($order->delivery_time) }}
-                                    </div> --}}
                                     <div class="text fs-12px">
                                         <span>عنوان التوصيل : </span>
                                         {{ $item->address }}
@@ -154,7 +149,6 @@
 
         </div>
     </div>
-
 @endsection
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASM7VEAkM0XHKds0Tlp7w--Hqd24k0BSo&callback=initMap" async
     defer></script>

@@ -1,5 +1,6 @@
-@extends('admin.layouts.admin')
-@section('title', 'عرض الرسالة')
+@extends('admin.layouts.admin', [
+    'title' => 'عرض الرسالة',
+])
 @section('content')
     <section class="show-user">
         <nav aria-label="breadcrumb ">

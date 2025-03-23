@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\ContactUs;
 use App\Models\Notification;
 use App\Observers\OrderObserver;
+use App\Observers\ProductObserver;
 use App\Observers\ContactUsObserver;
 use Illuminate\Pagination\Paginator;
 use App\Observers\NotificationObserver;

@@ -15,6 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.9",
+        "milon/barcode": "^12.0",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^6.10"
     },

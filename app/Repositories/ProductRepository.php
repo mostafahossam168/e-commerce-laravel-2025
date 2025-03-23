@@ -12,7 +12,8 @@ class ProductRepository implements ProductInterface
     {
         return Product::where(function ($q) {
             if (request('search')) {
-                $q->where('name', 'LIKE', '%' . request('search') . '%');
+                $q->where('name', 'LIKE', '%' . request('search') . '%')
+                    ->orWhere('id', request('search'));
             }
             if (request('status')) {
                 if (request('status') == 'yes') {

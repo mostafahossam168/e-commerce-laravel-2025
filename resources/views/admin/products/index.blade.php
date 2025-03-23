@@ -1,5 +1,6 @@
-@extends('admin.layouts.admin')
-@section('title', 'المنتجات')
+@extends('admin.layouts.admin', [
+    'title' => 'المنتجات',
+])
 @section('content')
     <div class="main-side">
         <x-alert-admin />
@@ -47,6 +48,7 @@
                         <th>الاسم</th>
                         <th>القسم</th>
                         <th>السعر</th>
+                        <th>الباركود</th>
                         <th>الصوره</th>
                         <th>الحالة</th>
                         <th>العمليات</th>
@@ -59,6 +61,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->category->name }}</td>
                             <td>{{ $item->price }}</td>
+                            <td> {!! DNS1D::getBarcodeHTML($item->id . '', 'C128') !!}</td>
                             <td>
                                 <img src="{{ display_file($item->main_image) }}" alt=""
                                     class="img-thumbnail img-preview" width="50">

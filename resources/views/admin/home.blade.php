@@ -53,7 +53,6 @@
                     الرئيسية </div>
                 <div class="large">
                     لوحة التحكم </div>
-                {{ App\Models\User::first()->status }}
             </div>
 
             @can('show-room_home')
@@ -222,7 +221,7 @@
                 labels: xValues,
                 datasets: [{
                         type: 'line',
-                        label: 'مزودين الخدمة',
+                        label: 'العملاء',
                         data: [0, 50, 500, 200, 400, 300, 100],
                         borderWidth: 2,
                         pointRadius: 1,
@@ -231,7 +230,7 @@
                         fill: true
                     },
                     {
-                        label: 'العملاء',
+                        label: 'الطلبات',
                         data: [100, 200, 700, 800, 500, 600, 300],
                         type: 'line',
                         borderWidth: 2,

@@ -1,5 +1,4 @@
-@extends('admin.layouts.admin')
-@section('title', 'اضافة منتج')
+@extends('admin.layouts.admin', ['title' => 'اضافة منتج'])
 @section('content')
     <div class="main-side">
         <x-alert-admin />
@@ -108,5 +107,4 @@
             </div>
         </form>
     </div>
-
 @endsection
